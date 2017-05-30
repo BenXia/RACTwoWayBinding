@@ -190,6 +190,10 @@ static NSString *kShowABTestEntranceUDKey = @"kShowABTestEntranceUDKey";
 - (void)textFieldDemoTwoWayBinding {
     NSLog (@"=======textFieldDemoTwoWayBinding=======");
     
+    // 先来看看self.userNameTextField.rac_newTextChannel与RACChannelTo(self.userNameTextField, text)的区别
+    //self.userNameTextField.rac_newTextChannel sends values when you type in the text field, but not when you change the text in the text field from code.
+    //RACChannelTo(self.userNameTextField, text) sends values when you change the text in the text field from code, but not when you type in the text field.
+    
     RACChannelTo(self.userNameTextField, text) = RACChannelTo(self, userName);
     // 这种写法其实已经是双向绑定的写法了，但是由于是UITextField不支持KVO原因代码设置self.userNameTextField.text的变化可以影响到userName，但是手动输入就不能影响到userName
     // userName的变化会影响self.userNameTextField.text的值
@@ -242,12 +246,17 @@ static NSString *kShowABTestEntranceUDKey = @"kShowABTestEntranceUDKey";
 - (void)textViewDemoTwoWayBinding {
     NSLog (@"=======textViewDemoTwoWayBinding=======");
     
+    // 先来看看self.profileTextView.rac_newTextChannel与RACChannelTo(self.profileTextView, text)的区别
+    //self.profileTextView.rac_newTextChannel sends values when you type in the text field, but not when you change the text in the text field from code.
+    //RACChannelTo(self.profileTextView, text) sends values when you change the text in the text field from code, but not when you type in the text field.
+    
+    // ！！！下面的实现与UITextField基本一致，只是UITextView的rac_textSignal会导致其delegate委托方法不触发，使用时千万需要注意这点
+    
     RACChannelTo(self.profileTextView, text) = RACChannelTo(self, profile);
     // 这种写法其实已经是双向绑定的写法了，但是由于是UITextView不支持KVO原因代码设置self.profileTextView.text的变化可以影响到profile，但是手动输入就不能影响到profile
     // profile的变化会影响self.profileTextView.text的值
     
     // 在这里对UITextView的text changed的信号重新订阅一下，以实现上面channel未实现的手动输入影响profile的联动
-#warning  ！！！ 这里有个坑，订阅了UITextView的rac_textSignal就会导致其delegate委托方法不触发，使用时千万需要注意这点
     @weakify(self)
     [self.profileTextView.rac_textSignal subscribeNext:^(NSString *text) {
         @strongify(self)
