@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomePageVC">
+            <connections>
+                <outlet property="profileTextView" destination="SuN-rK-DFs" id="MHn-PO-nm2"/>
+                <outlet property="scrollContentViewHeightConstraint" destination="cXz-cT-7jM" id="eI9-Of-bFK"/>
+                <outlet property="showABTestEntranceSwitch" destination="Mdl-v4-diF" id="3u4-Kp-pCp"/>
+                <outlet property="userNameTextField" destination="6d1-q6-1kV" id="3Eu-O0-twM"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gAN-Fx-9Wu">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bhl-Io-Rik" userLabel="ScrollContentView">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="klj-HB-4Dz" userLabel="UISwitch双向绑定">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                    <subviews>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mdl-v4-diF">
+                                            <rect key="frame" x="163" y="10" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="didSwitchValueChanged:" destination="-1" eventType="touchUpInside" id="K9p-26-pfP"/>
+                                            </connections>
+                                        </switch>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rpF-DR-4gz">
+                                            <rect key="frame" x="55.5" y="61" width="263" height="30"/>
+                                            <state key="normal" title="触发代码修改NSUserDefaults的绑定值"/>
+                                            <connections>
+                                                <action selector="didClickChangeUserDefaultValueWithCodeButton:" destination="-1" eventType="touchUpInside" id="535-Cs-lff"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="Mdl-v4-diF" firstAttribute="centerX" secondItem="klj-HB-4Dz" secondAttribute="centerX" id="0oL-hV-1al"/>
+                                        <constraint firstAttribute="height" constant="100" id="1ra-Xf-qET"/>
+                                        <constraint firstItem="rpF-DR-4gz" firstAttribute="centerX" secondItem="klj-HB-4Dz" secondAttribute="centerX" id="DU9-nq-dNp"/>
+                                        <constraint firstItem="rpF-DR-4gz" firstAttribute="top" secondItem="Mdl-v4-diF" secondAttribute="bottom" constant="20" id="NKg-bi-MpQ"/>
+                                        <constraint firstItem="Mdl-v4-diF" firstAttribute="top" secondItem="klj-HB-4Dz" secondAttribute="top" constant="10" id="egz-co-Fff"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tKO-3J-flX" userLabel="UITextField双向绑定">
+                                    <rect key="frame" x="0.0" y="100" width="375" height="100"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6d1-q6-1kV">
+                                            <rect key="frame" x="12" y="10" width="351" height="30"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cpw-RA-osA">
+                                            <rect key="frame" x="82" y="60" width="211" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="5Vp-Gd-ZMp"/>
+                                            </constraints>
+                                            <state key="normal" title="触发代码修改TextField的text值"/>
+                                            <connections>
+                                                <action selector="didClickChangeTextFieldTextWithCodeButton:" destination="-1" eventType="touchUpInside" id="LTP-RV-fA0"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="100" id="Ae6-o9-ATA"/>
+                                        <constraint firstItem="6d1-q6-1kV" firstAttribute="leading" secondItem="tKO-3J-flX" secondAttribute="leading" constant="12" id="B83-e8-TIM"/>
+                                        <constraint firstItem="6d1-q6-1kV" firstAttribute="centerX" secondItem="tKO-3J-flX" secondAttribute="centerX" id="KYR-bK-dFJ"/>
+                                        <constraint firstItem="Cpw-RA-osA" firstAttribute="top" secondItem="6d1-q6-1kV" secondAttribute="bottom" constant="20" id="QTr-Qb-hji"/>
+                                        <constraint firstItem="Cpw-RA-osA" firstAttribute="centerX" secondItem="tKO-3J-flX" secondAttribute="centerX" id="g5u-fj-xFc"/>
+                                        <constraint firstItem="6d1-q6-1kV" firstAttribute="top" secondItem="tKO-3J-flX" secondAttribute="top" constant="10" id="ttN-Bt-Dmt"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Is-VI-s2g" userLabel="UITextView双向绑定">
+                                    <rect key="frame" x="0.0" y="200" width="375" height="100"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SuN-rK-DFs">
+                                            <rect key="frame" x="12" y="10" width="351" height="30"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="sAT-A4-TFs"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHk-Sp-GP4">
+                                            <rect key="frame" x="82" y="60" width="211" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="BFB-mj-Rbo"/>
+                                            </constraints>
+                                            <state key="normal" title="触发代码修改TextView的text值"/>
+                                            <connections>
+                                                <action selector="didClickChangeTextViewTextWithCodeButton:" destination="-1" eventType="touchUpInside" id="ySq-8Y-E51"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="SuN-rK-DFs" firstAttribute="centerX" secondItem="6Is-VI-s2g" secondAttribute="centerX" id="9ul-le-11t"/>
+                                        <constraint firstItem="AHk-Sp-GP4" firstAttribute="top" secondItem="SuN-rK-DFs" secondAttribute="bottom" constant="20" id="9wS-cf-9pa"/>
+                                        <constraint firstItem="AHk-Sp-GP4" firstAttribute="centerX" secondItem="6Is-VI-s2g" secondAttribute="centerX" id="Blf-g1-Fuz"/>
+                                        <constraint firstItem="SuN-rK-DFs" firstAttribute="top" secondItem="6Is-VI-s2g" secondAttribute="top" constant="10" id="DYL-hQ-EWb"/>
+                                        <constraint firstAttribute="height" constant="100" id="PEg-dE-wXO"/>
+                                        <constraint firstItem="SuN-rK-DFs" firstAttribute="leading" secondItem="6Is-VI-s2g" secondAttribute="leading" constant="12" id="xIg-UK-NKj"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="6Is-VI-s2g" firstAttribute="top" secondItem="tKO-3J-flX" secondAttribute="bottom" id="D5m-f7-6tN"/>
+                                <constraint firstAttribute="trailing" secondItem="6Is-VI-s2g" secondAttribute="trailing" id="GN8-Dz-ApE"/>
+                                <constraint firstAttribute="trailing" secondItem="tKO-3J-flX" secondAttribute="trailing" id="II9-gj-uIM"/>
+                                <constraint firstItem="6Is-VI-s2g" firstAttribute="leading" secondItem="Bhl-Io-Rik" secondAttribute="leading" id="Jsj-VJ-bmN"/>
+                                <constraint firstItem="klj-HB-4Dz" firstAttribute="top" secondItem="Bhl-Io-Rik" secondAttribute="top" id="Ocm-yO-efN"/>
+                                <constraint firstItem="tKO-3J-flX" firstAttribute="top" secondItem="klj-HB-4Dz" secondAttribute="bottom" id="Yl7-cN-FU4"/>
+                                <constraint firstAttribute="height" constant="667" id="cXz-cT-7jM"/>
+                                <constraint firstItem="klj-HB-4Dz" firstAttribute="leading" secondItem="Bhl-Io-Rik" secondAttribute="leading" id="eUX-5k-Ybp"/>
+                                <constraint firstItem="tKO-3J-flX" firstAttribute="leading" secondItem="Bhl-Io-Rik" secondAttribute="leading" id="hcV-Nl-iIp"/>
+                                <constraint firstAttribute="trailing" secondItem="klj-HB-4Dz" secondAttribute="trailing" id="i85-Er-F6m"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Bhl-Io-Rik" secondAttribute="bottom" id="2iD-P8-hpO"/>
+                        <constraint firstItem="Bhl-Io-Rik" firstAttribute="centerX" secondItem="gAN-Fx-9Wu" secondAttribute="centerX" id="K7P-yz-pGa"/>
+                        <constraint firstItem="Bhl-Io-Rik" firstAttribute="leading" secondItem="gAN-Fx-9Wu" secondAttribute="leading" id="exI-Az-nZX"/>
+                        <constraint firstItem="Bhl-Io-Rik" firstAttribute="top" secondItem="gAN-Fx-9Wu" secondAttribute="top" id="mvX-25-DnY"/>
+                        <constraint firstAttribute="trailing" secondItem="Bhl-Io-Rik" secondAttribute="trailing" id="x9j-VG-7nm"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="gAN-Fx-9Wu" secondAttribute="bottom" id="Hfw-Uq-mYu"/>
+                <constraint firstAttribute="trailing" secondItem="gAN-Fx-9Wu" secondAttribute="trailing" id="Oos-Jm-2nH"/>
+                <constraint firstItem="gAN-Fx-9Wu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hv1-o1-ejW"/>
+                <constraint firstItem="gAN-Fx-9Wu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iTQ-HY-2qh"/>
+            </constraints>
+            <point key="canvasLocation" x="46.5" y="54.5"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
+</document>

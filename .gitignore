@@ -1,0 +1,10 @@
+# XCode Related
+.DS_Store
+*.pbxuser
+!default.pbxuser
+xcuserdata
+xcshareddata
+*.moved-aside
+DerivedData
+.idea/
+
