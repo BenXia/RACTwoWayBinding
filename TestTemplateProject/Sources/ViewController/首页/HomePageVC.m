@@ -156,7 +156,7 @@ static NSString *kShowABTestEntranceUDKey = @"kShowABTestEntranceUDKey";
     [switchTerminal subscribe:defaultsTerminal];
     [defaultsTerminal subscribe:switchTerminal];
     
-    NSLog (@"self.showABTestEntranceSwitch.on: %d NSUserDefaults value: %@", self.showABTestEntranceSwitch.on, [[NSUserDefaults standardUserDefaults] valueForKey:kShowABTestEntranceUDKey]);
+    NSLog (@"self.showABTestEntranceSwitch.on: %d NSUserDefaults value: %@", self.showABTestEntranceSwitch.on, [[NSUserDefaults standardUserDefaults] objectForKey:kShowABTestEntranceUDKey]);
     
     NSLog (@"\n\n\n\n");
 }
@@ -166,7 +166,7 @@ static NSString *kShowABTestEntranceUDKey = @"kShowABTestEntranceUDKey";
     
     // RAC的观察可能还没触发，所以这一块先等1秒，再打印
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSLog (@"self.showABTestEntranceSwitch.on: %d NSUserDefaults value: %@", self.showABTestEntranceSwitch.on, [[NSUserDefaults standardUserDefaults] valueForKey:kShowABTestEntranceUDKey]);
+        NSLog (@"self.showABTestEntranceSwitch.on: %d NSUserDefaults value: %@", self.showABTestEntranceSwitch.on, [[NSUserDefaults standardUserDefaults] objectForKey:kShowABTestEntranceUDKey]);
     });
 }
 
@@ -175,13 +175,13 @@ static NSString *kShowABTestEntranceUDKey = @"kShowABTestEntranceUDKey";
     
 #warning ！！！ 这一块有点问题，设置完NSUserDefautls值后发现UISwitch控件有时没有变化
     
-    BOOL oldBoolValue = [[NSUserDefaults standardUserDefaults] boolForKey:kShowABTestEntranceUDKey];
-    [[NSUserDefaults standardUserDefaults] setBool:!oldBoolValue forKey:kShowABTestEntranceUDKey];
+    BOOL oldBoolValue = [[[NSUserDefaults standardUserDefaults] objectForKey:kShowABTestEntranceUDKey] boolValue];
+    [[NSUserDefaults standardUserDefaults] setObject:@(!oldBoolValue) forKey:kShowABTestEntranceUDKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     // RAC的观察可能还没触发，所以这一块先等1秒，再打印
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSLog (@"self.showABTestEntranceSwitch.on: %d NSUserDefaults value: %@", self.showABTestEntranceSwitch.on, [[NSUserDefaults standardUserDefaults] valueForKey:kShowABTestEntranceUDKey]);
+        NSLog (@"self.showABTestEntranceSwitch.on: %d NSUserDefaults value: %@", self.showABTestEntranceSwitch.on, [[NSUserDefaults standardUserDefaults] objectForKey:kShowABTestEntranceUDKey]);
     });
 }
 
@@ -193,6 +193,11 @@ static NSString *kShowABTestEntranceUDKey = @"kShowABTestEntranceUDKey";
     // 先来看看self.userNameTextField.rac_newTextChannel与RACChannelTo(self.userNameTextField, text)的区别
     //self.userNameTextField.rac_newTextChannel sends values when you type in the text field, but not when you change the text in the text field from code.
     //RACChannelTo(self.userNameTextField, text) sends values when you change the text in the text field from code, but not when you type in the text field.
+    
+//    // 当用下面代码做双向绑定时，给userNameTextField.text赋值时会影响不到self.userName
+//    RACChannelTerminal *textFieldChannelT = self.userNameTextField.rac_newTextChannel;
+//    RAC(self, userName) = textFieldChannelT;
+//    [RACObserve(self, userName) subscribe:textFieldChannelT];
     
     RACChannelTo(self.userNameTextField, text) = RACChannelTo(self, userName);
     // 这种写法其实已经是双向绑定的写法了，但是由于是UITextField不支持KVO原因代码设置self.userNameTextField.text的变化可以影响到userName，但是手动输入就不能影响到userName
@@ -246,9 +251,9 @@ static NSString *kShowABTestEntranceUDKey = @"kShowABTestEntranceUDKey";
 - (void)textViewDemoTwoWayBinding {
     NSLog (@"=======textViewDemoTwoWayBinding=======");
     
-    // 先来看看self.profileTextView.rac_newTextChannel与RACChannelTo(self.profileTextView, text)的区别
-    //self.profileTextView.rac_newTextChannel sends values when you type in the text field, but not when you change the text in the text field from code.
-    //RACChannelTo(self.profileTextView, text) sends values when you change the text in the text field from code, but not when you type in the text field.
+    // 先来看看self.profileTextView.rac_textSignal与RACChannelTo(self.profileTextView, text)的区别
+    //self.profileTextView.rac_textSignal sends values when you type in the text view, but not when you change the text in the text view from code.
+    //RACChannelTo(self.profileTextView, text) sends values when you change the text in the text view from code, but not when you type in the text view.
     
     // ！！！下面的实现与UITextField基本一致，只是UITextView的rac_textSignal会导致其delegate委托方法不触发，使用时千万需要注意这点
     
