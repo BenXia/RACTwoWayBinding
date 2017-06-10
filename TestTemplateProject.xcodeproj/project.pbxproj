@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2B1041A2256952E4587B17F5 /* libPods-TestTemplateProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6364692DBB1E35BBAC518E /* libPods-TestTemplateProject.a */; };
+		330A8D341EEBBAD100BCA17A /* NSUserDefaults+CustomRACSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 330A8D331EEBBAD100BCA17A /* NSUserDefaults+CustomRACSupport.m */; };
 		330F7BF61ED333F00009280A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 330F7BDA1ED333F00009280A /* AppDelegate.m */; };
 		330F7BF81ED333F00009280A /* UIView+frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 330F7BDF1ED333F00009280A /* UIView+frame.m */; };
 		330F7BF91ED333F00009280A /* Ben_BallView.m in Sources */ = {isa = PBXBuildFile; fileRef = 330F7BE61ED333F00009280A /* Ben_BallView.m */; };
@@ -24,6 +25,8 @@
 
 /* Begin PBXFileReference section */
 		0B6364692DBB1E35BBAC518E /* libPods-TestTemplateProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TestTemplateProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		330A8D321EEBBAD100BCA17A /* NSUserDefaults+CustomRACSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+CustomRACSupport.h"; sourceTree = "<group>"; };
+		330A8D331EEBBAD100BCA17A /* NSUserDefaults+CustomRACSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+CustomRACSupport.m"; sourceTree = "<group>"; };
 		330F7BBD1ED3321F0009280A /* TestTemplateProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTemplateProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		330F7BD91ED333F00009280A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		330F7BDA1ED333F00009280A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -118,6 +121,8 @@
 		330F7BDB1ED333F00009280A /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				330A8D321EEBBAD100BCA17A /* NSUserDefaults+CustomRACSupport.h */,
+				330A8D331EEBBAD100BCA17A /* NSUserDefaults+CustomRACSupport.m */,
 				330F7C0A1ED349AB0009280A /* UIView+Helper.h */,
 				330F7C0B1ED349AB0009280A /* UIView+Helper.m */,
 				330F7BDE1ED333F00009280A /* UIView+frame.h */,
@@ -356,6 +361,7 @@
 			files = (
 				330F7BFC1ED333F00009280A /* Ben_TriangleView.m in Sources */,
 				330F7BF81ED333F00009280A /* UIView+frame.m in Sources */,
+				330A8D341EEBBAD100BCA17A /* NSUserDefaults+CustomRACSupport.m in Sources */,
 				330F7BF91ED333F00009280A /* Ben_BallView.m in Sources */,
 				330F7BF61ED333F00009280A /* AppDelegate.m in Sources */,
 				330F7C0D1ED349AB0009280A /* UIView+Helper.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "HomePageVC.h"
+#import "NSUserDefaults+CustomRACSupport.h"
 
 static NSString *kShowABTestEntranceUDKey = @"kShowABTestEntranceUDKey";
 
@@ -49,7 +50,7 @@ static NSString *kShowABTestEntranceUDKey = @"kShowABTestEntranceUDKey";
     
     self.title = @"RAC双向绑定";
     self.userNameTextField.delegate = self;
-    self.profileTextView.delegate = self;   // 注意观察
+    self.profileTextView.delegate = self;   // 注意: UITextView的rac_textSignal被订阅会导致其delegate委托方法不触发
     
     self.scrollContentViewHeightConstraint.constant = 300;
     
@@ -132,16 +133,10 @@ static NSString *kShowABTestEntranceUDKey = @"kShowABTestEntranceUDKey";
     NSLog (@"self.onOffTextValue: %@ self.onOffBoolValue: %d", self.onOffTextValue, self.onOffBoolValue);
     
     self.onOffTextValue = @"On";
-    // RAC的观察可能还没触发，所以这一块先等1秒，再打印
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSLog (@"self.onOffTextValue: %@ self.onOffBoolValue: %d", self.onOffTextValue, self.onOffBoolValue);
-    });
+    NSLog (@"self.onOffTextValue: %@ self.onOffBoolValue: %d", self.onOffTextValue, self.onOffBoolValue);
     
     self.onOffBoolValue = NO;
-    // RAC的观察可能还没触发，所以这一块先等1秒，再打印
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSLog (@"self.onOffTextValue: %@ self.onOffBoolValue: %d", self.onOffTextValue, self.onOffBoolValue);
-    });
+    NSLog (@"self.onOffTextValue: %@ self.onOffBoolValue: %d", self.onOffTextValue, self.onOffBoolValue);
     
     NSLog (@"\n\n\n\n");
 }
@@ -152,7 +147,7 @@ static NSString *kShowABTestEntranceUDKey = @"kShowABTestEntranceUDKey";
     NSLog (@"=======switchDemoTwoWayBinding=======");
     
     RACChannelTerminal *switchTerminal = self.showABTestEntranceSwitch.rac_newOnChannel;
-    RACChannelTerminal *defaultsTerminal = [[NSUserDefaults standardUserDefaults] rac_channelTerminalForKey:kShowABTestEntranceUDKey];
+    RACChannelTerminal *defaultsTerminal = [[NSUserDefaults standardUserDefaults] customChannelTerminalForKey:kShowABTestEntranceUDKey];
     [switchTerminal subscribe:defaultsTerminal];
     [defaultsTerminal subscribe:switchTerminal];
     
@@ -164,25 +159,16 @@ static NSString *kShowABTestEntranceUDKey = @"kShowABTestEntranceUDKey";
 - (IBAction)didSwitchValueChanged:(id)sender {
     NSLog (@"=======didSwitchValueChanged=======");
     
-    // RAC的观察可能还没触发，所以这一块先等1秒，再打印
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSLog (@"self.showABTestEntranceSwitch.on: %d NSUserDefaults value: %@", self.showABTestEntranceSwitch.on, [[NSUserDefaults standardUserDefaults] objectForKey:kShowABTestEntranceUDKey]);
-    });
+    NSLog (@"self.showABTestEntranceSwitch.on: %d NSUserDefaults value: %@", self.showABTestEntranceSwitch.on, [[NSUserDefaults standardUserDefaults] objectForKey:kShowABTestEntranceUDKey]);
 }
 
 - (IBAction)didClickChangeUserDefaultValueWithCodeButton:(id)sender {
     NSLog (@"=======didClickChangeUserDefaultValueWithCodeButton=======");
     
-#warning ！！！ 这一块有点问题，设置完NSUserDefautls值后发现UISwitch控件有时没有变化
-    
     BOOL oldBoolValue = [[[NSUserDefaults standardUserDefaults] objectForKey:kShowABTestEntranceUDKey] boolValue];
     [[NSUserDefaults standardUserDefaults] setObject:@(!oldBoolValue) forKey:kShowABTestEntranceUDKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    // RAC的观察可能还没触发，所以这一块先等1秒，再打印
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSLog (@"self.showABTestEntranceSwitch.on: %d NSUserDefaults value: %@", self.showABTestEntranceSwitch.on, [[NSUserDefaults standardUserDefaults] objectForKey:kShowABTestEntranceUDKey]);
-    });
+
+    NSLog (@"self.showABTestEntranceSwitch.on: %d NSUserDefaults value: %@", self.showABTestEntranceSwitch.on, [[NSUserDefaults standardUserDefaults] objectForKey:kShowABTestEntranceUDKey]);
 }
 
 #pragma mark - UITextField的text与自定义属性双向绑定
@@ -210,19 +196,14 @@ static NSString *kShowABTestEntranceUDKey = @"kShowABTestEntranceUDKey";
         
         self.userName = text;
         
-        // RAC的观察可能还没触发，所以这一块先等1秒，再打印
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            NSLog (@"self.userNameTextField.text: %@ userName: %@", self.userNameTextField.text, self.userName);
-        });
+        NSLog (@"self.userNameTextField.text: %@ userName: %@", self.userNameTextField.text, self.userName);
     }];
     
     NSLog (@"self.userNameTextField.text: %@ userName: %@", self.userNameTextField.text, self.userName);
     
     self.userName = @"hello world";
-    // RAC的观察可能还没触发，所以这一块先等1秒，再打印
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSLog (@"self.userNameTextField.text: %@ userName: %@", self.userNameTextField.text, self.userName);
-    });
+
+    NSLog (@"self.userNameTextField.text: %@ userName: %@", self.userNameTextField.text, self.userName);
     
     NSLog (@"\n\n\n\n");
 }
@@ -231,19 +212,14 @@ static NSString *kShowABTestEntranceUDKey = @"kShowABTestEntranceUDKey";
     NSLog (@"=======didClickChangeTextFieldTextWithCodeButton=======");
     
     self.userNameTextField.text = @"hello rac";
-    // RAC的观察可能还没触发，所以这一块先等1秒，再打印
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSLog (@"self.userNameTextField.text: %@ userName: %@", self.userNameTextField.text, self.userName);
-    });
+
+    NSLog (@"self.userNameTextField.text: %@ userName: %@", self.userNameTextField.text, self.userName);
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     NSLog (@"=======textFieldDidEndEditing=======");
     
-    // RAC的观察可能还没触发，所以这一块先等1秒，再打印
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSLog (@"self.userNameTextField.text: %@ userName: %@", self.userNameTextField.text, self.userName);
-    });
+    NSLog (@"self.userNameTextField.text: %@ userName: %@", self.userNameTextField.text, self.userName);
 }
 
 #pragma mark - UITextView的text与自定义属性双向绑定
@@ -268,19 +244,13 @@ static NSString *kShowABTestEntranceUDKey = @"kShowABTestEntranceUDKey";
         
         self.profile = text;
         
-        // RAC的观察可能还没触发，所以这一块先等1秒，再打印
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            NSLog (@"self.profileTextView.text: %@ profile: %@", self.profileTextView.text, self.profile);
-        });
+        NSLog (@"self.profileTextView.text: %@ profile: %@", self.profileTextView.text, self.profile);
     }];
     
     NSLog (@"self.profileTextView.text: %@ profile: %@", self.profileTextView.text, self.profile);
     
     self.profile = @"ReactiveCocoa";
-    // RAC的观察可能还没触发，所以这一块先等1秒，再打印
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSLog (@"self.profileTextView.text: %@ profile: %@", self.profileTextView.text, self.profile);
-    });
+    NSLog (@"self.profileTextView.text: %@ profile: %@", self.profileTextView.text, self.profile);
     
     NSLog (@"\n\n\n\n");
 }
@@ -289,19 +259,13 @@ static NSString *kShowABTestEntranceUDKey = @"kShowABTestEntranceUDKey";
     NSLog (@"=======didClickChangeTextViewTextWithCodeButton=======");
     
     self.profileTextView.text = @"Objective C";
-    // RAC的观察可能还没触发，所以这一块先等1秒，再打印
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSLog (@"self.profileTextView.text: %@ profile: %@", self.profileTextView.text, self.profile);
-    });
+    NSLog (@"self.profileTextView.text: %@ profile: %@", self.profileTextView.text, self.profile);
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
     NSLog (@"=======textViewDidChange=======");
     
-    // RAC的观察可能还没触发，所以这一块先等1秒，再打印
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSLog (@"self.profileTextView.text: %@ profile: %@", self.profileTextView.text, self.profile);
-    });
+    NSLog (@"！！！UITextView的rac_textSignal被订阅会导致其delegate委托方法不触发，使用时千万需要注意这点");
 }
 
 @end
