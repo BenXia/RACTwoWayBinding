@@ -146,10 +146,26 @@ static NSString *kShowABTestEntranceUDKey = @"kShowABTestEntranceUDKey";
 - (void)switchDemoTwoWayBinding {
     NSLog (@"=======switchDemoTwoWayBinding=======");
     
-    RACChannelTerminal *switchTerminal = self.showABTestEntranceSwitch.rac_newOnChannel;
-    RACChannelTerminal *defaultsTerminal = [[NSUserDefaults standardUserDefaults] customChannelTerminalForKey:kShowABTestEntranceUDKey];
-    [switchTerminal subscribe:defaultsTerminal];
-    [defaultsTerminal subscribe:switchTerminal];
+    // 第一种实现方法：
+    [[RACKVOChannel alloc] initWithTarget:[NSUserDefaults standardUserDefaults]
+                                  keyPath:kShowABTestEntranceUDKey nilValue:@(NO)][@"followingTerminal"] = [[RACKVOChannel alloc] initWithTarget:self.showABTestEntranceSwitch keyPath:@"on" nilValue:@(NO)][@"followingTerminal"];
+    @weakify(self)
+    [self.showABTestEntranceSwitch.rac_newOnChannel subscribeNext:^(NSNumber *onValue) {
+        @strongify(self)
+        
+        // 下面两句都可以
+        [self.showABTestEntranceSwitch setValue:onValue forKey:@"on"];
+        //[[NSUserDefaults standardUserDefaults] setObject:onValue forKey:kShowABTestEntranceUDKey];
+        
+        NSLog (@"=======didClickSwitchControl=======");
+        NSLog (@"self.showABTestEntranceSwitch.on: %d NSUserDefaults value: %@", self.showABTestEntranceSwitch.on, [[NSUserDefaults standardUserDefaults] objectForKey:kShowABTestEntranceUDKey]);
+    }];
+
+     // 第二种实现方法：
+//    RACChannelTerminal *switchTerminal = self.showABTestEntranceSwitch.rac_newOnChannel;
+//    RACChannelTerminal *defaultsTerminal = [[NSUserDefaults standardUserDefaults] customChannelTerminalForKey:kShowABTestEntranceUDKey];
+//    [switchTerminal subscribe:defaultsTerminal];
+//    [defaultsTerminal subscribe:switchTerminal];
     
     NSLog (@"self.showABTestEntranceSwitch.on: %d NSUserDefaults value: %@", self.showABTestEntranceSwitch.on, [[NSUserDefaults standardUserDefaults] objectForKey:kShowABTestEntranceUDKey]);
     

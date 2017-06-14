@@ -11,16 +11,12 @@
 		330A8D341EEBBAD100BCA17A /* NSUserDefaults+CustomRACSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 330A8D331EEBBAD100BCA17A /* NSUserDefaults+CustomRACSupport.m */; };
 		330F7BF61ED333F00009280A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 330F7BDA1ED333F00009280A /* AppDelegate.m */; };
 		330F7BF81ED333F00009280A /* UIView+frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 330F7BDF1ED333F00009280A /* UIView+frame.m */; };
-		330F7BF91ED333F00009280A /* Ben_BallView.m in Sources */ = {isa = PBXBuildFile; fileRef = 330F7BE61ED333F00009280A /* Ben_BallView.m */; };
-		330F7BFA1ED333F00009280A /* Ben_CradleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 330F7BE81ED333F00009280A /* Ben_CradleView.m */; };
-		330F7BFB1ED333F00009280A /* Ben_CustomiseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 330F7BEA1ED333F00009280A /* Ben_CustomiseView.m */; };
-		330F7BFC1ED333F00009280A /* Ben_TriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 330F7BEC1ED333F00009280A /* Ben_TriangleView.m */; };
 		330F7C001ED333F00009280A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 330F7BF51ED333F00009280A /* main.m */; };
 		330F7C021ED334380009280A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 330F7C011ED334380009280A /* Assets.xcassets */; };
-		330F7C061ED3494D0009280A /* HomePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 330F7C041ED3494D0009280A /* HomePageVC.m */; };
-		330F7C071ED3494D0009280A /* HomePageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 330F7C051ED3494D0009280A /* HomePageVC.xib */; };
 		330F7C0D1ED349AB0009280A /* UIView+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 330F7C0B1ED349AB0009280A /* UIView+Helper.m */; };
 		337EEC291EDC3F2C00EDC166 /* NSObject+DLIntrospection.m in Sources */ = {isa = PBXBuildFile; fileRef = 337EEC281EDC3F2C00EDC166 /* NSObject+DLIntrospection.m */; };
+		B51B059A1EF0F2350033222B /* HomePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B51B05981EF0F2350033222B /* HomePageVC.m */; };
+		B51B059B1EF0F2350033222B /* HomePageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B51B05991EF0F2350033222B /* HomePageVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,20 +28,9 @@
 		330F7BDA1ED333F00009280A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		330F7BDE1ED333F00009280A /* UIView+frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+frame.h"; sourceTree = "<group>"; };
 		330F7BDF1ED333F00009280A /* UIView+frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+frame.m"; sourceTree = "<group>"; };
-		330F7BE51ED333F00009280A /* Ben_BallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ben_BallView.h; sourceTree = "<group>"; };
-		330F7BE61ED333F00009280A /* Ben_BallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ben_BallView.m; sourceTree = "<group>"; };
-		330F7BE71ED333F00009280A /* Ben_CradleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ben_CradleView.h; sourceTree = "<group>"; };
-		330F7BE81ED333F00009280A /* Ben_CradleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ben_CradleView.m; sourceTree = "<group>"; };
-		330F7BE91ED333F00009280A /* Ben_CustomiseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ben_CustomiseView.h; sourceTree = "<group>"; };
-		330F7BEA1ED333F00009280A /* Ben_CustomiseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ben_CustomiseView.m; sourceTree = "<group>"; };
-		330F7BEB1ED333F00009280A /* Ben_TriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ben_TriangleView.h; sourceTree = "<group>"; };
-		330F7BEC1ED333F00009280A /* Ben_TriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ben_TriangleView.m; sourceTree = "<group>"; };
 		330F7BF41ED333F00009280A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		330F7BF51ED333F00009280A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		330F7C011ED334380009280A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		330F7C031ED3494D0009280A /* HomePageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageVC.h; sourceTree = "<group>"; };
-		330F7C041ED3494D0009280A /* HomePageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageVC.m; sourceTree = "<group>"; };
-		330F7C051ED3494D0009280A /* HomePageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageVC.xib; sourceTree = "<group>"; };
 		330F7C0A1ED349AB0009280A /* UIView+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Helper.h"; sourceTree = "<group>"; };
 		330F7C0B1ED349AB0009280A /* UIView+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Helper.m"; sourceTree = "<group>"; };
 		330F7ECC1ED352250009280A /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -53,6 +38,9 @@
 		337EEC281EDC3F2C00EDC166 /* NSObject+DLIntrospection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DLIntrospection.m"; sourceTree = "<group>"; };
 		5C6D28EEC1B5E3424CF2308B /* Pods-TestTemplateProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestTemplateProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestTemplateProject/Pods-TestTemplateProject.debug.xcconfig"; sourceTree = "<group>"; };
 		8667C82644C5D48169DF56D2 /* Pods-TestTemplateProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestTemplateProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestTemplateProject/Pods-TestTemplateProject.release.xcconfig"; sourceTree = "<group>"; };
+		B51B05971EF0F2350033222B /* HomePageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageVC.h; sourceTree = "<group>"; };
+		B51B05981EF0F2350033222B /* HomePageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageVC.m; sourceTree = "<group>"; };
+		B51B05991EF0F2350033222B /* HomePageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,50 +145,18 @@
 		330F7BE31ED333F00009280A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				330F7BE41ED333F00009280A /* CustomiseViews */,
-				330F7BED1ED333F00009280A /* TableViewCells */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		330F7BE41ED333F00009280A /* CustomiseViews */ = {
-			isa = PBXGroup;
-			children = (
-				330F7BE51ED333F00009280A /* Ben_BallView.h */,
-				330F7BE61ED333F00009280A /* Ben_BallView.m */,
-				330F7BE71ED333F00009280A /* Ben_CradleView.h */,
-				330F7BE81ED333F00009280A /* Ben_CradleView.m */,
-				330F7BE91ED333F00009280A /* Ben_CustomiseView.h */,
-				330F7BEA1ED333F00009280A /* Ben_CustomiseView.m */,
-				330F7BEB1ED333F00009280A /* Ben_TriangleView.h */,
-				330F7BEC1ED333F00009280A /* Ben_TriangleView.m */,
-			);
-			path = CustomiseViews;
-			sourceTree = "<group>";
-		};
-		330F7BED1ED333F00009280A /* TableViewCells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 		330F7BEE1ED333F00009280A /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				330F7BEF1ED333F00009280A /* 首页 */,
+				B51B05971EF0F2350033222B /* HomePageVC.h */,
+				B51B05981EF0F2350033222B /* HomePageVC.m */,
+				B51B05991EF0F2350033222B /* HomePageVC.xib */,
 			);
 			path = ViewController;
-			sourceTree = "<group>";
-		};
-		330F7BEF1ED333F00009280A /* 首页 */ = {
-			isa = PBXGroup;
-			children = (
-				330F7C031ED3494D0009280A /* HomePageVC.h */,
-				330F7C041ED3494D0009280A /* HomePageVC.m */,
-				330F7C051ED3494D0009280A /* HomePageVC.xib */,
-			);
-			path = "首页";
 			sourceTree = "<group>";
 		};
 		330F7BF21ED333F00009280A /* Supporting Files */ = {
@@ -299,7 +255,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				330F7C071ED3494D0009280A /* HomePageVC.xib in Resources */,
+				B51B059B1EF0F2350033222B /* HomePageVC.xib in Resources */,
 				330F7C021ED334380009280A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,15 +315,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				330F7BFC1ED333F00009280A /* Ben_TriangleView.m in Sources */,
+				B51B059A1EF0F2350033222B /* HomePageVC.m in Sources */,
 				330F7BF81ED333F00009280A /* UIView+frame.m in Sources */,
 				330A8D341EEBBAD100BCA17A /* NSUserDefaults+CustomRACSupport.m in Sources */,
-				330F7BF91ED333F00009280A /* Ben_BallView.m in Sources */,
 				330F7BF61ED333F00009280A /* AppDelegate.m in Sources */,
 				330F7C0D1ED349AB0009280A /* UIView+Helper.m in Sources */,
-				330F7C061ED3494D0009280A /* HomePageVC.m in Sources */,
-				330F7BFB1ED333F00009280A /* Ben_CustomiseView.m in Sources */,
-				330F7BFA1ED333F00009280A /* Ben_CradleView.m in Sources */,
 				330F7C001ED333F00009280A /* main.m in Sources */,
 				337EEC291EDC3F2C00EDC166 /* NSObject+DLIntrospection.m in Sources */,
 			);
