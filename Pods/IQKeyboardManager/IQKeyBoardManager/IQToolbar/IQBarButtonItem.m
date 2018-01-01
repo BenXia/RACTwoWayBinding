@@ -1,7 +1,7 @@
 //
-//  IQBarButtonItem.m
+// IQBarButtonItem.m
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,84 +22,72 @@
 // THE SOFTWARE.
 
 #import "IQBarButtonItem.h"
-#import "IQToolbar.h"
 #import "IQKeyboardManagerConstantsInternal.h"
+#import <UIKit/NSAttributedString.h>
 
 @implementation IQBarButtonItem
 
-+(void)load
++(void)initialize
 {
-    //Tint color
-    [[self appearance] setTintColor:nil];
+    [super initialize];
 
-    //Title
-    [[self appearance] setTitlePositionAdjustment:UIOffsetZero forBarMetrics:UIBarMetricsDefault];
-    [[self appearance] setTitleTextAttributes:nil forState:UIControlStateNormal];
-    [[self appearance] setTitleTextAttributes:nil forState:UIControlStateHighlighted];
-    [[self appearance] setTitleTextAttributes:nil forState:UIControlStateDisabled];
-    [[self appearance] setTitleTextAttributes:nil forState:UIControlStateSelected];
-    [[self appearance] setTitleTextAttributes:nil forState:UIControlStateApplication];
-    [[self appearance] setTitleTextAttributes:nil forState:UIControlStateReserved];
-    
-    //Background Image
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateNormal         barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateHighlighted    barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateDisabled       barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateSelected       barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateApplication    barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateReserved       barMetrics:UIBarMetricsDefault];
+    IQBarButtonItem *appearanceProxy = [self appearance];
 
+    NSArray <NSNumber*> *states = @[@(UIControlStateNormal),@(UIControlStateHighlighted),@(UIControlStateDisabled),@(UIControlStateSelected),@(UIControlStateApplication),@(UIControlStateReserved)];
     
-#ifdef __IPHONE_8_0
-    #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0
-    
-    if (IQ_IS_IOS8_OR_GREATER)
+    for (NSNumber *state in states)
     {
-        [[self appearance] setBackgroundImage:nil forState:UIControlStateNormal         style:UIBarButtonItemStyleBordered barMetrics:UIBarMetricsDefault];
-        [[self appearance] setBackgroundImage:nil forState:UIControlStateHighlighted    style:UIBarButtonItemStyleBordered barMetrics:UIBarMetricsDefault];
-        [[self appearance] setBackgroundImage:nil forState:UIControlStateDisabled       style:UIBarButtonItemStyleBordered barMetrics:UIBarMetricsDefault];
-        [[self appearance] setBackgroundImage:nil forState:UIControlStateSelected       style:UIBarButtonItemStyleBordered barMetrics:UIBarMetricsDefault];
-        [[self appearance] setBackgroundImage:nil forState:UIControlStateApplication    style:UIBarButtonItemStyleBordered barMetrics:UIBarMetricsDefault];
-        [[self appearance] setBackgroundImage:nil forState:UIControlStateReserved       style:UIBarButtonItemStyleBordered barMetrics:UIBarMetricsDefault];
+        UIControlState controlState = [state unsignedIntegerValue];
+
+        [appearanceProxy setBackgroundImage:nil forState:controlState barMetrics:UIBarMetricsDefault];
+        [appearanceProxy setBackgroundImage:nil forState:controlState style:UIBarButtonItemStyleDone barMetrics:UIBarMetricsDefault];
+        [appearanceProxy setBackgroundImage:nil forState:controlState style:UIBarButtonItemStylePlain barMetrics:UIBarMetricsDefault];
+        [appearanceProxy setBackButtonBackgroundImage:nil forState:controlState barMetrics:UIBarMetricsDefault];
     }
 
-    #endif
+    [appearanceProxy setTitlePositionAdjustment:UIOffsetZero forBarMetrics:UIBarMetricsDefault];
+    [appearanceProxy setBackgroundVerticalPositionAdjustment:0 forBarMetrics:UIBarMetricsDefault];
+    [appearanceProxy setBackButtonTitlePositionAdjustment:UIOffsetZero forBarMetrics:UIBarMetricsDefault];
+    [appearanceProxy setBackButtonBackgroundVerticalPositionAdjustment:0 forBarMetrics:UIBarMetricsDefault];
+}
 
-#else
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateNormal         style:UIBarButtonItemStyleBordered barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateHighlighted    style:UIBarButtonItemStyleBordered barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateDisabled       style:UIBarButtonItemStyleBordered barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateSelected       style:UIBarButtonItemStyleBordered barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateApplication    style:UIBarButtonItemStyleBordered barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateReserved       style:UIBarButtonItemStyleBordered barMetrics:UIBarMetricsDefault];
-#endif
+-(void)setTintColor:(UIColor *)tintColor
+{
+    [super setTintColor:tintColor];
+    
+    //titleTextAttributes tweak is to overcome an issue comes with iOS11 where appearanceProxy set for NSForegroundColorAttributeName and bar button texts start appearing in appearance proxy color
+    NSMutableDictionary *textAttributes = [[self titleTextAttributesForState:UIControlStateNormal] mutableCopy]?:[NSMutableDictionary new];
+    
+    textAttributes[NSForegroundColorAttributeName] = tintColor;
+    
+    [self setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
+}
 
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateNormal         style:UIBarButtonItemStyleDone barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateHighlighted    style:UIBarButtonItemStyleDone barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateDisabled       style:UIBarButtonItemStyleDone barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateSelected       style:UIBarButtonItemStyleDone barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateApplication    style:UIBarButtonItemStyleDone barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateReserved       style:UIBarButtonItemStyleDone barMetrics:UIBarMetricsDefault];
+- (instancetype)initWithBarButtonSystemItem:(UIBarButtonSystemItem)systemItem target:(nullable id)target action:(nullable SEL)action
+{
+    self = [super initWithBarButtonSystemItem:systemItem target:target action:action];
     
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateNormal         style:UIBarButtonItemStylePlain barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateHighlighted    style:UIBarButtonItemStylePlain barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateDisabled       style:UIBarButtonItemStylePlain barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateSelected       style:UIBarButtonItemStylePlain barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateApplication    style:UIBarButtonItemStylePlain barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackgroundImage:nil forState:UIControlStateReserved       style:UIBarButtonItemStylePlain barMetrics:UIBarMetricsDefault];
+    if (self)
+    {
+        _isSystemItem = YES;
+    }
+    
+    return self;
+}
 
-    [[self appearance] setBackgroundVerticalPositionAdjustment:0 forBarMetrics:UIBarMetricsDefault];
+
+-(void)setTarget:(nullable id)target action:(nullable SEL)action
+{
+    NSInvocation *invocation = nil;
     
-    //Back Button
-    [[self appearance] setBackButtonBackgroundImage:nil forState:UIControlStateNormal       barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackButtonBackgroundImage:nil forState:UIControlStateHighlighted  barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackButtonBackgroundImage:nil forState:UIControlStateDisabled     barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackButtonBackgroundImage:nil forState:UIControlStateSelected     barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackButtonBackgroundImage:nil forState:UIControlStateApplication  barMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackButtonBackgroundImage:nil forState:UIControlStateReserved     barMetrics:UIBarMetricsDefault];
+    if (target && action)
+    {
+        invocation = [NSInvocation invocationWithMethodSignature:[target methodSignatureForSelector:action]];
+        invocation.target = target;
+        invocation.selector = action;
+    }
     
-    [[self appearance] setBackButtonTitlePositionAdjustment:UIOffsetZero forBarMetrics:UIBarMetricsDefault];
-    [[self appearance] setBackButtonBackgroundVerticalPositionAdjustment:0 forBarMetrics:UIBarMetricsDefault];
+    self.invocation = invocation;
 }
 
 @end

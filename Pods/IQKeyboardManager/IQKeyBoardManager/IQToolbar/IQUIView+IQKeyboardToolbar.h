@@ -1,7 +1,7 @@
 //
-//  UIView+IQToolbar.h
+// IQUIView+IQKeyboardToolbar.h
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,69 +21,41 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import "IQToolbar.h"
 
 #import <UIKit/UIView.h>
-
-@class UIBarButtonItem;
 
 /**
  UIView category methods to add IQToolbar on UIKeyboard.
  */
 @interface UIView (IQToolbarAddition)
 
-
 ///-------------------------
-/// @name Title and Distance
+/// @name Toolbar Title
 ///-------------------------
 
 /**
- If shouldHideTitle is YES, then title will not be added to the toolbar. Default to NO.
+ IQToolbar references for better customization control.
  */
-@property (assign, nonatomic) BOOL shouldHideTitle;
-
-
-///-----------------------------------------
-/// @name Customised Invocation Registration
-///-----------------------------------------
+@property (readonly, nonatomic, nonnull) IQToolbar *keyboardToolbar;
 
 /**
- Additional target & action to do get callback action. Note that setting custom `previous` selector doesn't affect native `previous` functionality, this is just used to notifiy user to do additional work according to need.
- 
- @param target Target object.
- @param action Target Selector.
+ If `shouldHideToolbarPlaceholder` is YES, then title will not be added to the toolbar. Default to NO.
  */
--(void)setCustomPreviousTarget:(nullable id)target action:(nullable SEL)action;
+@property (assign, nonatomic) BOOL shouldHideToolbarPlaceholder;
+@property (assign, nonatomic) BOOL shouldHidePlaceholderText __attribute__((deprecated("This is renamed to `shouldHideToolbarPlaceholder` for more clear naming.")));
 
 /**
- Additional target & action to do get callback action. Note that setting custom `next` selector doesn't affect native `next` functionality, this is just used to notifiy user to do additional work according to need.
- 
- @param target Target object.
- @param action Target Selector.
+ `toolbarPlaceholder` to override default `placeholder` text when drawing text on toolbar.
  */
--(void)setCustomNextTarget:(nullable id)target action:(nullable SEL)action;
+@property (nullable, strong, nonatomic) NSString* toolbarPlaceholder;
+@property (nullable, strong, nonatomic) NSString* placeholderText __attribute__((deprecated("This is renamed to `toolbarPlaceholder` for more clear naming.")));
 
 /**
- Additional target & action to do get callback action. Note that setting custom `done` selector doesn't affect native `done` functionality, this is just used to notifiy user to do additional work according to need.
- 
- @param target Target object.
- @param action Target Selector.
+ `drawingToolbarPlaceholder` will be actual text used to draw on toolbar. This would either `placeholder` or `toolbarPlaceholder`.
  */
--(void)setCustomDoneTarget:(nullable id)target action:(nullable SEL)action;
-
-/**
- Customized Invocation to be called on previous arrow action. previousInvocation is internally created using setCustomPreviousTarget: method.
- */
-@property (nullable, strong, nonatomic) NSInvocation *previousInvocation;
-
-/**
- Customized Invocation to be called on next arrow action. nextInvocation is internally created using setCustomNextTarget: method.
- */
-@property (nullable, strong, nonatomic) NSInvocation *nextInvocation;
-
-/**
- Customized Invocation to be called on done action. doneInvocation is internally created using setCustomDoneTarget: method.
- */
-@property (nullable, strong, nonatomic) NSInvocation *doneInvocation;
+@property (nullable, strong, nonatomic, readonly) NSString* drawingToolbarPlaceholder;
+@property (nullable, strong, nonatomic, readonly) NSString* drawingPlaceholderText __attribute__((deprecated("This is renamed to `drawingToolbarPlaceholder` for more clear naming.")));
 
 ///------------
 /// @name Done
@@ -156,7 +128,7 @@
  @param action Right button action name. Usually 'doneAction:(IQBarButtonItem*)item'.
  @param shouldShowPlaceholder A boolean to indicate whether to show textField placeholder on IQToolbar'.
  */
-- (void)addRightButtonOnKeyboardWithImage:(nullable UIImage*)image target:(nullable id)target action:(nullable SEL)action shouldShowPlaceholder:(BOOL)showPlaceholder;
+- (void)addRightButtonOnKeyboardWithImage:(nullable UIImage*)image target:(nullable id)target action:(nullable SEL)action shouldShowPlaceholder:(BOOL)shouldShowPlaceholder;
 
 /**
  Helper function to add Right button on keyboard.
@@ -338,19 +310,6 @@
  @param shouldShowPlaceholder A boolean to indicate whether to show textField placeholder on IQToolbar'.
  */
 - (void)addPreviousNextRightOnKeyboardWithTarget:(nullable id)target rightButtonImage:(nullable UIImage*)rightButtonImage previousAction:(nullable SEL)previousAction nextAction:(nullable SEL)nextAction rightButtonAction:(nullable SEL)rightButtonAction shouldShowPlaceholder:(BOOL)shouldShowPlaceholder;
-
-
-///-----------------------------------
-/// @name Enable/Disable Previous/Next
-///-----------------------------------
-
-/**
- Helper function to enable and disable previous next buttons.
- 
- @param isPreviousEnabled BOOL to enable/disable previous button on keyboard.
- @param isNextEnabled  BOOL to enable/disable next button on keyboard..
- */
-- (void)setEnablePrevious:(BOOL)isPreviousEnabled next:(BOOL)isNextEnabled;
 
 @end
 

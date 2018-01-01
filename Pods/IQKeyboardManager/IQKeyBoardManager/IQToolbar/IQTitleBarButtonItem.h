@@ -1,7 +1,7 @@
 //
-//  IQTitleBarButtonItem.h
+// IQTitleBarButtonItem.h
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,9 +21,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/NSObjCRuntime.h>
 #import "IQKeyboardManagerConstants.h"
 #import "IQBarButtonItem.h"
+
+#import <Foundation/NSObjCRuntime.h>
 
 /**
  BarButtonItem with title text.
@@ -33,7 +34,12 @@
 /**
  Font to be used in bar button. Default is (system font 12.0 bold).
  */
-@property(nullable, nonatomic, strong) UIFont *font;
+@property(nullable, nonatomic, strong) UIFont *titleFont;
+
+/**
+ selectableTextColor to be used for displaying button text when button is enabled.
+ */
+@property(nullable, nonatomic, strong) UIColor *selectableTextColor;
 
 /**
  Initialize with frame and title.

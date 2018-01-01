@@ -1,7 +1,7 @@
 //
-//  IQUIScrollView+Additions.m
+// IQUIScrollView+Additions.m
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,6 +25,18 @@
 #import <objc/runtime.h>
 
 @implementation UIScrollView (Additions)
+
+-(void)setShouldIgnoreScrollingAdjustment:(BOOL)shouldIgnoreScrollingAdjustment
+{
+    objc_setAssociatedObject(self, @selector(shouldIgnoreScrollingAdjustment), @(shouldIgnoreScrollingAdjustment), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+-(BOOL)shouldIgnoreScrollingAdjustment
+{
+    NSNumber *shouldIgnoreScrollingAdjustment = objc_getAssociatedObject(self, @selector(shouldIgnoreScrollingAdjustment));
+    
+    return [shouldIgnoreScrollingAdjustment boolValue];
+}
 
 -(void)setShouldRestoreScrollViewContentOffset:(BOOL)shouldRestoreScrollViewContentOffset
 {

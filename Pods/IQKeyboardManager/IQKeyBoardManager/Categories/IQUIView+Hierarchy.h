@@ -1,7 +1,7 @@
 //
-//  UIView+Hierarchy.h
+// IQUIView+Hierarchy.h
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,15 +30,6 @@
  UIView hierarchy category.
  */
 @interface UIView (IQ_UIView_Hierarchy)
-
-///------------------------------
-/// @name canBecomeFirstResponder
-///------------------------------
-
-/**
- Returns YES if IQKeyboardManager asking for `canBecomeFirstResponder. Useful when doing custom work in `textFieldShouldBeginEditing:` delegate.
- */
-@property (nonatomic, readonly) BOOL isAskingCanBecomeFirstResponder;
 
 ///----------------------
 /// @name viewControllers

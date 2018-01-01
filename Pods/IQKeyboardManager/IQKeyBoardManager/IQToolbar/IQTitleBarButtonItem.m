@@ -1,7 +1,7 @@
 //
-//  IQTitleBarButtonItem.m
+// IQTitleBarButtonItem.m
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,15 +24,16 @@
 #import "IQTitleBarButtonItem.h"
 #import "IQKeyboardManagerConstants.h"
 #import "IQKeyboardManagerConstantsInternal.h"
+
 #import <UIKit/UILabel.h>
+#import <UIKit/UIButton.h>
 
 @implementation IQTitleBarButtonItem
 {
     UIView *_titleView;
-    UILabel *_titleLabel;
+    UIButton *_titleButton;
 }
-@synthesize font = _font;
-
+@synthesize titleFont = _titleFont;
 
 -(nonnull instancetype)initWithTitle:(nullable NSString *)title
 {
@@ -41,42 +42,96 @@
     {
         _titleView = [[UIView alloc] init];
         _titleView.backgroundColor = [UIColor clearColor];
-        _titleView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
 
-        _titleLabel = [[UILabel alloc] init];
-        _titleLabel.numberOfLines = 0;
-        [_titleLabel setTextColor:[UIColor grayColor]];
-        [_titleLabel setBackgroundColor:[UIColor clearColor]];
-        [_titleLabel setTextAlignment:NSTextAlignmentCenter];
-        _titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        _titleButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        _titleButton.enabled = NO;
+        _titleButton.titleLabel.numberOfLines = 3;
+        [_titleButton setTitleColor:[UIColor colorWithRed:0.0 green:0.5 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+        [_titleButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+        [_titleButton setBackgroundColor:[UIColor clearColor]];
+        [_titleButton.titleLabel setTextAlignment:NSTextAlignmentCenter];
         [self setTitle:title];
-        [self setFont:[UIFont systemFontOfSize:13.0]];
-        [_titleView addSubview:_titleLabel];
+        [self setTitleFont:[UIFont systemFontOfSize:13.0]];
+        [_titleView addSubview:_titleButton];
         
+#ifdef __IPHONE_11_0
+        if (@available(iOS 11.0, *))
+        {
+            CGFloat layoutDefaultLowPriority = UILayoutPriorityDefaultLow-1;
+            CGFloat layoutDefaultHighPriority = UILayoutPriorityDefaultHigh-1;
+
+            _titleView.translatesAutoresizingMaskIntoConstraints = NO;
+            [_titleView setContentHuggingPriority:layoutDefaultLowPriority forAxis:UILayoutConstraintAxisVertical];
+            [_titleView setContentHuggingPriority:layoutDefaultLowPriority forAxis:UILayoutConstraintAxisHorizontal];
+            [_titleView setContentCompressionResistancePriority:layoutDefaultHighPriority forAxis:UILayoutConstraintAxisVertical];
+            [_titleView setContentCompressionResistancePriority:layoutDefaultHighPriority forAxis:UILayoutConstraintAxisHorizontal];
+            
+            _titleButton.translatesAutoresizingMaskIntoConstraints = NO;
+            [_titleButton setContentHuggingPriority:layoutDefaultLowPriority forAxis:UILayoutConstraintAxisVertical];
+            [_titleButton setContentHuggingPriority:layoutDefaultLowPriority forAxis:UILayoutConstraintAxisHorizontal];
+            [_titleButton setContentCompressionResistancePriority:layoutDefaultHighPriority forAxis:UILayoutConstraintAxisVertical];
+            [_titleButton setContentCompressionResistancePriority:layoutDefaultHighPriority forAxis:UILayoutConstraintAxisHorizontal];
+
+            NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:_titleButton attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_titleView attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+            NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:_titleButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_titleView attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+            NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:_titleButton attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:_titleView attribute:NSLayoutAttributeLeading multiplier:1 constant:0];
+            NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:_titleButton attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:_titleView attribute:NSLayoutAttributeTrailing multiplier:1 constant:0];
+            [_titleView addConstraints:@[top,bottom,leading,trailing]];
+        }
+        else
+#endif
+        {
+            _titleView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+            _titleButton.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        }
+
         self.customView = _titleView;
-        self.enabled = NO;
     }
     return self;
 }
 
--(void)setFont:(UIFont *)font
+-(void)setTitleFont:(UIFont *)titleFont
 {
-    _font = font;
+    _titleFont = titleFont;
     
-    if (font)
+    if (titleFont)
     {
-        _titleLabel.font = font;
+        _titleButton.titleLabel.font = titleFont;
     }
     else
     {
-        _titleLabel.font = [UIFont systemFontOfSize:13];
+        _titleButton.titleLabel.font = [UIFont systemFontOfSize:13];
     }
 }
 
 -(void)setTitle:(NSString *)title
 {
     [super setTitle:title];
-    _titleLabel.text = title;
+    [_titleButton setTitle:title forState:UIControlStateNormal];
+}
+
+-(void)setSelectableTextColor:(UIColor*)selectableTextColor
+{
+    _selectableTextColor = selectableTextColor;
+    [_titleButton setTitleColor:_selectableTextColor forState:UIControlStateNormal];
+}
+
+-(void)setInvocation:(NSInvocation *)invocation
+{
+    [super setInvocation:invocation];
+    
+    if (invocation.target == nil || invocation.selector == NULL)
+    {
+        self.enabled = NO;
+        _titleButton.enabled = NO;
+        [_titleButton removeTarget:nil action:NULL forControlEvents:UIControlEventTouchUpInside];
+    }
+    else
+    {
+        self.enabled = YES;
+        _titleButton.enabled = YES;
+        [_titleButton addTarget:invocation.target action:invocation.selector forControlEvents:UIControlEventTouchUpInside];
+    }
 }
 
 @end

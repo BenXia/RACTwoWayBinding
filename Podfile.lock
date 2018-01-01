@@ -1,29 +1,23 @@
 PODS:
-  - IQKeyboardManager (3.3.7)
-  - Masonry (1.0.2)
-  - ReactiveCocoa (2.5):
-    - ReactiveCocoa/UI (= 2.5)
-  - ReactiveCocoa/Core (2.5):
-    - ReactiveCocoa/no-arc
-  - ReactiveCocoa/no-arc (2.5)
-  - ReactiveCocoa/UI (2.5):
-    - ReactiveCocoa/Core
-  - SDWebImage (4.0.0):
-    - SDWebImage/Core (= 4.0.0)
-  - SDWebImage/Core (4.0.0)
+  - IQKeyboardManager (5.0.7)
+  - Masonry (1.1.0)
+  - ReactiveObjC (3.0.0)
+  - SDWebImage (4.2.2):
+    - SDWebImage/Core (= 4.2.2)
+  - SDWebImage/Core (4.2.2)
 
 DEPENDENCIES:
   - IQKeyboardManager
   - Masonry
-  - ReactiveCocoa
+  - ReactiveObjC
   - SDWebImage
 
 SPEC CHECKSUMS:
-  IQKeyboardManager: 249c3946acf61345c18b038eb50863fe2793e3a8
-  Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
-  ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
-  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  IQKeyboardManager: 0bfa4607d39924116b5c0c8b55b5d789288b5cba
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  ReactiveObjC: ce79989e8684b9086b5f8d0c74bc7b81a8729c9e
+  SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
 
-PODFILE CHECKSUM: 60797e35d20491168ecb6e168beb3a19fa6c8018
+PODFILE CHECKSUM: e2155159d1c83607502d39fca62c9ef0a13321fd
 
 COCOAPODS: 1.2.1
