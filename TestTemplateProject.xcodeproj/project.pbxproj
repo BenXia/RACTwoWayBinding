@@ -97,7 +97,6 @@
 				330F7BE21ED333F00009280A /* Vendor */,
 				330F7BE01ED333F00009280A /* Global */,
 				330F7BDB1ED333F00009280A /* Category */,
-				330F7BE11ED333F00009280A /* Network */,
 				330F7BE31ED333F00009280A /* View */,
 				330F7BEE1ED333F00009280A /* ViewController */,
 				330F7BD91ED333F00009280A /* AppDelegate.h */,
@@ -125,13 +124,6 @@
 				330F7ECC1ED352250009280A /* PrefixHeader.pch */,
 			);
 			path = Global;
-			sourceTree = "<group>";
-		};
-		330F7BE11ED333F00009280A /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Network;
 			sourceTree = "<group>";
 		};
 		330F7BE21ED333F00009280A /* Vendor */ = {
